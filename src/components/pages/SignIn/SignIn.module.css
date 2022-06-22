@@ -1,0 +1,71 @@
+.signInPage {
+  color: white;
+}
+.signInPage input {
+  width: 300px;
+  height: 40px;
+  padding: 10px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  background-color: transparent;
+  color: white;
+}
+.form {
+  width: 400px;
+  height: 420px;
+  margin: 120px auto 0;
+  text-align: center;
+  padding: 30px;
+  border: 2px solid white;
+  border-radius: 20px;
+}
+.logo {
+  font-size: 35px;
+  font-family: "Harpseal";
+  color: #fff;
+  transition: 0.6s;
+}
+
+.logo span {
+  font-size: 35px;
+  font-family: "Harpseal";
+  color: rgb(0, 223, 37);
+  transition: 0.6s;
+} 
+.title {
+  width: 180px;
+  margin: 10px auto 20px;
+  font-size: 25px;
+  font-weight: 800;
+}
+.inputs {
+  width: 300px;
+  height: 95px;
+  margin: 0 auto 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.signUpButton,
+.signInButton {
+  width: 300px;
+  height: 40px;
+  margin: 0 auto 15px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  background-color: transparent;
+  font-weight: 800;
+}
+
+.signUpButton:disabled,
+.signInButton:disabled {
+  color: rgb(118, 118, 118);
+}
+
+.signUpButton:not([disabled]):hover,
+.signInButton:not([disabled]):hover {
+  cursor: pointer;
+  color: rgb(0, 223, 37);
+}

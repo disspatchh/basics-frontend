@@ -1,0 +1,49 @@
+@font-face {
+  font-family: Montserrat;
+  src: url("../assets/Montserrat/static/Montserrat-Regular.ttf");
+}
+
+@font-face {
+  font-family: Montserrat-Bold;
+  src: url("../assets/Montserrat/static/Montserrat-Bold.ttf");
+}
+
+@font-face {
+  font-family: Harpseal;
+  src: url("../assets/Harpseal/ofont.ru_Harpseal.ttf");
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Montserrat";
+  font-size: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: black;
+  margin-left: calc(100vw - 100%);
+  margin-right: 0;
+}
+
+select {
+  outline: none;
+  height: 35px;
+  padding: 5px;
+}
+
+/* стилизация скролла */
+html::-webkit-scrollbar {
+  width: 10px;
+}
+
+html::-webkit-scrollbar-track {
+  background: white;
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: rgb(0, 223, 37);
+  border-radius: 5px;
+  border: 3px solid white;
+}

@@ -1,0 +1,68 @@
+.peoplePage {
+  width: 1200px;
+  margin: auto;
+  color: white;
+  padding: 50px 0;
+}
+
+.usersList {
+  width: 1100px;
+  margin: 100px auto 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.userBlock {
+  width: 550px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px;
+  transition: 0.4s;
+}
+
+.userBlock:hover {
+  transform: scale(105%);
+  transition: 0.4s;
+}
+
+.userAvatar {
+  position: relative;
+  overflow: hidden;
+  width: 200px;
+  height: 200px;
+  margin-right: 20px;
+  border-radius: 15px;
+}
+
+.userAvatar img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 175px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 11px;
+}
+
+.userInfo {
+  background: linear-gradient(25deg, rgb(0, 0, 0) 53%, rgb(0, 255, 64));
+  height: 130px;
+  width: 290px;
+  /* border: 5px solid transparent;
+  border-image: linear-gradient(to right top,rgb(0, 0, 0) 10%,  transparent 30%, transparent 70%, white 90%);
+  border-image-slice: 1; */
+}
+
+.userName {
+  font-size: 60px;
+  font-family: "Montserrat";
+  line-height: 80px;
+}
+
+.userAge {
+  font-size: 40px;
+  font-family: "Montserrat-Bold";
+}
