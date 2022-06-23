@@ -3,7 +3,6 @@ import styles from "./Header.module.css";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logOut } from "../../reduxToolkit/usersSlice";
-import avatar from "../../assets/avatar.jpg";
 import { motion } from "framer-motion";
 
 function Header(props) {
@@ -23,7 +22,7 @@ function Header(props) {
   const currentUserId = useSelector((state) => state.users.currentUserId);
 
   return (
-    <header className={scroll && styles.scrolled}>
+    <header className={scroll ? styles.scrolled : ""}>
       <div className={styles.header}>
         {/* лого */}
         <Link to="/">
@@ -53,7 +52,7 @@ function Header(props) {
                   <Link key={user._id} to="/profile">
                     <div className={styles.userProfile}>
                       <div className={styles.avatar}>
-                        <img src={avatar} alt="avatar" />
+                        <img src={`http://localhost:3030/${user.image}`} alt="avatar" />
                       </div>
                       <div className={scroll ? `${styles.userName} ${styles.scrolledName}` : styles.userName}>{user.name}</div>
                     </div>

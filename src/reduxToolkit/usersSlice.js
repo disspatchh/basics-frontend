@@ -19,24 +19,25 @@ export const fetchUsers = createAsyncThunk(
   }
 );
 
-// ВОТ ЕБАНЫЙ ЗАПРОС
 export const signUp = createAsyncThunk(
   "users/signUp",
   async function (
-    { name, login, password, date, gender, file },
+    { name, login, password, date, gender },
     { rejectWithValue }
   ) {
     try {
-      const formData = new FormData();
-      formData.append("image", file);
-  
-      console.log(formData);
       const res = await fetch("http://localhost:3030/people/signup", {
         method: "POST",
         headers: {
-          "Content-type": "application/json",
+          "Content-Type": "application/json",
         },
-        body: formData
+        body: JSON.stringify({
+          name,
+          email: login,
+          password,
+          date,
+          gender,
+        }),
       });
 
       if (!res.ok) {
@@ -44,6 +45,7 @@ export const signUp = createAsyncThunk(
       }
 
       const data = await res.json();
+      console.log(data);
 
       return data;
     } catch (e) {
@@ -59,7 +61,7 @@ export const signIn = createAsyncThunk(
       const res = await fetch("http://localhost:3030/people/signin", {
         method: "POST",
         headers: {
-          "Content-type": "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email: login,
@@ -71,10 +73,97 @@ export const signIn = createAsyncThunk(
         throw new Error("Server Error!");
       }
 
-      // console.log(res);
       const data = await res.json();
       localStorage.setItem("token", data.token);
       localStorage.setItem("userId", data.id);
+
+      return data;
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  }
+);
+
+export const changeImage = createAsyncThunk(
+  "users/changeImage",
+  async function ({ image }, { rejectWithValue, getState }) {
+    const state = getState();
+
+    const formData = new FormData();
+    formData.set("image", image);
+
+    console.log(formData);
+    try {
+      const res = await fetch(`http://localhost:3030/people/image/${state.users.currentUserId}`, {
+        method: "PATCH",
+        body: formData,
+      });
+
+      if (!res.ok) {
+        throw new Error("Server Error!");
+      }
+
+      const data = await res.json();
+
+      return data;
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  }
+);
+
+export const changeName = createAsyncThunk(
+  "users/changeName",
+  async function ({ name }, { rejectWithValue, getState }) {
+    const state = getState();
+
+    try {
+      const res = await fetch("http://localhost:3030/people/name", {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${state.users.token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Server Error!");
+      }
+
+      const data = await res.json();
+
+      return data;
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  }
+);
+
+export const changePassword = createAsyncThunk(
+  "users/changePassword",
+  async function ({ password }, { rejectWithValue, getState }) {
+    const state = getState();
+
+    try {
+      const res = await fetch("http://localhost:3030/people/password", {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${state.users.token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          password,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Server Error!");
+      }
+
+      const data = await res.json();
 
       return data;
     } catch (e) {
@@ -90,13 +179,13 @@ const usersSlice = createSlice({
     loading: false,
     error: null,
     token: localStorage.getItem("token"),
-    currentUserId: localStorage.getItem("userId")
+    currentUserId: localStorage.getItem("userId"),
   },
   reducers: {
     logOut(state, action) {
-      console.log(12121212);
       localStorage.clear();
       state.token = null;
+      state.currentUserId = "";
     },
   },
   extraReducers: {
@@ -114,6 +203,22 @@ const usersSlice = createSlice({
       state.error = action.payload.error;
     },
 
+    // регистрация
+    [signUp.pending]: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    [signUp.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.error = null;
+      state.users.push(action.payload);
+      state.currentUserId = action.payload.id;
+    },
+    [signUp.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload.error;
+    },
+
     // вход
     [signIn.pending]: (state) => {
       state.loading = true;
@@ -126,6 +231,27 @@ const usersSlice = createSlice({
       state.currentUserId = action.payload.id;
     },
     [signIn.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload.error;
+    },
+
+    // смена имени
+    [changeName.pending]: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    [changeName.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.error = null;
+      state.users = state.users.map((user) => {
+        if (user._id === action.payload._id) {
+          user.name = action.payload.name;
+          return user;
+        }
+        return user;
+      });
+    },
+    [changeName.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload.error;
     },

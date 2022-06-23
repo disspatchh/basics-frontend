@@ -21,12 +21,9 @@ function SignUp(props) {
   const date = `${day}.${month}.${year}`;
 
   const [gender, setGender] = useState("male");
-  const [file, setFile] = useState(null);
 
-  // ТА САМАЯ ФУНКЦИЯ
   const handleClickSignUp = () => {
-    dispatch(signUp({ name, login, password, date, gender, file}));
-    console.log(file);
+    dispatch(signUp({ name, login, password, date, gender }));
   };
 
   return (
@@ -127,7 +124,7 @@ function SignUp(props) {
               id="male"
               value="male"
               checked={gender === "male" && "checked"}
-              onClick={(e) => setGender(e.target.value)}
+              onChange={(e) => setGender(e.target.value)}
             />
             <label htmlFor="male">Мужской</label>
             <input
@@ -136,25 +133,20 @@ function SignUp(props) {
               id="female"
               value="female"
               checked={gender === "female" && "checked"}
-              onClick={(e) => setGender(e.target.value)}
+              onChange={(e) => setGender(e.target.value)}
             />
             <label htmlFor="female">Женский</label>
           </div>
-              
-          {/* загрузка аватарки */}
-          <div className={styles.userAvatarUpload}>
-            <input type="file" onChange={(e) => setFile(e.target.files[0])} />
-          </div>
         </div>
-        {/* <Link to="/signin"> */}
-          <button
-            className={styles.signUpButton}
-            // disabled={!(name && login && password) && "disabled"}
-            onClick={handleClickSignUp}
-          >
-            Зарегистрироваться
-          </button>
-        {/* </Link> */}
+        <Link to="/signin">
+        <button
+          className={styles.signUpButton}
+          disabled={!(name && login && password) && "disabled"}
+          onClick={handleClickSignUp}
+        >
+          Зарегистрироваться
+        </button>
+        </Link>
         <Link to="/signin">
           <button className={styles.signInButton}>Войти</button>
         </Link>

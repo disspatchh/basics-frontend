@@ -1,17 +1,9 @@
-import React, { useEffect } from "react";
-import { fetchUsers } from "../../../reduxToolkit/usersSlice";
+import React from "react";
 import styles from "./People.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import avatar from "../../../assets/avatar.jpg";
+import {  useSelector } from "react-redux";
 import { motion } from "framer-motion";
 
 function People(props) {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchUsers());
-  }, [dispatch]);
-
   const users = useSelector((state) => state.users.users);
   const currentUserId = useSelector((state) => state.users.currentUserId);
 
@@ -40,7 +32,7 @@ function People(props) {
                 className={styles.userBlock}
               >
                 <div className={styles.userAvatar}>
-                  <img src={avatar} alt="avatar" />
+                  <img src={`http://localhost:3030/${user.image}`} alt="avatar" />
                 </div>
                 <div className={styles.userInfo}>
                   <div className={styles.userName}>{user.name}</div>
@@ -67,11 +59,11 @@ function People(props) {
                         case "1":
                           return "год";
                         case "2":
-                          return "год";
+                          return "года";
                         case "3":
-                          return "год";
+                          return "года";
                         case "4":
-                          return "год";
+                          return "года";
                         default:
                           return null;
                       }

@@ -4,25 +4,167 @@
 
 .userBlock {
   width: 1000px;
-  margin: 120px auto 0;
+  margin: 120px auto 50px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .userAvatar {
   position: relative;
   overflow: hidden;
-  width: 250px;
-  height: 350px;
-  margin-right: 20px;
+  width: 260px;
+  height: 300px;
   border-radius: 15px;
+  margin-bottom: 20px;
 }
 
 .userAvatar img {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
-  width: 250px;
-  height: 350px;
+  transform: translate(-50%, -50%);
+  width: 260px;
+  height: 300px;
   object-fit: cover;
   border-radius: 11px;
+}
+
+.avatarBlock {
+  position: relative;
+}
+
+.userAvatarUpload {
+  width: 200px;
+  position: absolute;
+  top: 267px;
+  left: 8px;
+}
+
+.userAvatarUpload input {
+  width: 250px;
+}
+
+.buttons {
+  width: 260px;
+}
+
+.uploadBtn {
+  width: 260px;
+  height: 40px;
+  background-color: white;
+  color: rgb(0, 223, 37);
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.uploadBtn:disabled {
+  background-color: rgb(151, 151, 151);
+  color: white;
+  cursor: default;
+  transition: 0.3s;
+}
+
+.cancelBtn {
+  background-color: transparent;
+  font-size: 14px;
+  cursor: pointer;
+  color: rgb(151, 151, 151);
+  border: none;
+}
+
+.cancelBtn:hover {
+  color: white;
+}
+
+.userInfo {
+  width: 700px;
+  height: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.userName {
+  font-size: 35px;
+  font-weight: 800;
+}
+
+.changeNameBtn {
+  background-color: transparent;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 10px;
+  color: rgb(151, 151, 151);
+  border: none;
+}
+.changeNameBtn:disabled {
+  cursor: default;
+}
+
+.changeNameBtn:not([disabled]):hover {
+  color: white;
+}
+
+.userEmail,
+.userDate {
+  font-size: 25px;
+}
+
+.changePasswordBtn {
+  width: 260px;
+  height: 40px;
+  background-color: white;
+  color: rgb(0, 223, 37);
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.changePasswordBtn:disabled {
+  background-color: rgb(151, 151, 151);
+  color: white;
+  cursor: default;
+  transition: 0.3s;
+}
+
+.userName input {
+  background-color: transparent;
+  color: white;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid white;
+}
+
+.userPassword {
+  height: 40px;
+  width: 540px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.userPassword input {
+  height: 40px;
+  width: 260px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid white;
+  border-radius: 5px;
+  padding: 0 10px;
+}
+
+.userPassword .buttons {
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.userPassword .cancelBtn {
+  position: absolute;
+  top: 45px;
 }
